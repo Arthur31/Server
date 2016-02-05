@@ -8,7 +8,20 @@ var querystring = require('querystring');
 
 
 var server = http.createServer(function(req, res) {
-        var params= querystring.parse(url.parse(req.url).query);
+        var body = "";
+        req.on('data', function (chunk) {
+        body += chunk;
+    });
+        req.on('end', function () {
+        console.log('body: ' + body);
+        var jsonObj = JSON.parse(body);
+        console.log(jsonObj.$key);
+    })
+    res.end('Hello, World!');
+});
+
+
+        /*var params= querystring.parse(url.parse(req.url).query);
         res.writeHead(200, {'Content-Type': 'text/html'});
         if('prenom' in params) {
         	if(params['prenom'] == 'Arthur' && params['pass'] == 'Arthur'){
@@ -40,10 +53,46 @@ var server = http.createServer(function(req, res) {
         	res.end(index);
         	console.log('Nouvelle connection');
         }
-        res.end();
-});
+        res.end();*/
+//});
 server.listen(8080);
 console.log('server pret');
+
+
+
+/*var qs = require('querystring');
+
+function (request, response) {
+    if (request.method == 'POST') {
+        var body = '';
+
+        request.on('data', function (data) {
+            body += data;
+
+            // Too much POST data, kill the connection!
+            // 1e6 === 1 * Math.pow(10, 6) === 1 * 1000000 ~~~ 1MB
+            if (body.length > 1e6)
+                request.connection.destroy();
+        });
+
+        request.on('end', function () {
+            var post = qs.parse(body);
+            // use post['blah'], etc.
+        });
+    }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
