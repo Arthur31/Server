@@ -2,11 +2,15 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
-var index = fs.readFileSync('index.html');
-var index1 = fs.readFileSync('index1.html');
+// var index = fs.readFileSync('index.html');
+// var index1 = fs.readFileSync('index1.html');
+
+var index = "Hi index here";
+var index1 = "hi bis indes1 here";
+
 var querystring = require('querystring');
 
-
+/*                      POST method
 var server = http.createServer(function(req, res) {
         var body = "";
         req.on('data', function (chunk) {
@@ -20,8 +24,10 @@ var server = http.createServer(function(req, res) {
     res.end('Hello, World!');
 });
 
+*/
 
-        /*var params= querystring.parse(url.parse(req.url).query);
+
+        var params= querystring.parse(url.parse(req.url).query);
         res.writeHead(200, {'Content-Type': 'text/html'});
         if('prenom' in params) {
         	if(params['prenom'] == 'Arthur' && params['pass'] == 'Arthur'){
@@ -53,7 +59,7 @@ var server = http.createServer(function(req, res) {
         	res.end(index);
         	console.log('Nouvelle connection');
         }
-        res.end();*/
+        res.end();
 //});
 server.listen(8080);
 console.log('server pret');
